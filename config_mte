@@ -1,0 +1,18 @@
+import json
+
+config = {
+	"pole_pairs": 7,
+	"motor_type": MOTOR_TYPE_HIGH_CURRENT,
+	"dc_bus_overvoltage_trip_level": 56.0,
+	"dc_bus_undervoltage_trip_level": 8.0,
+	# If needed add other config
+}
+
+with open("odrive_config.json","w") as f:
+	json.dump(config,f)
+
+def apply_config(odrive, config):
+	for key, value in config.item():
+		exec(f"odrive.{key} = {value}")
+
+apply_config(odrv0, config)
